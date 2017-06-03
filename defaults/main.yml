@@ -1,6 +1,6 @@
 ---
-# Install a specific version of Supervisor by setting it (e.g. '3.3.1').
-# supervisor_version: '3.3.1'
+# Install a specific version of Supervisor by setting it here (e.g. '3.3.1').
+supervisor_version: latest
 
 # Choose whether to use an init script or systemd unit configuration to start
 # Supervisor when it's installed and/or after a system boot.

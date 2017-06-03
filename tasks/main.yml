@@ -3,7 +3,7 @@
   pip:
     name: supervisor
     state: present
-    version: "{{ supervisor_version | default(omit) }}"
+    version: "{{ supervisor_version | default('latest') }}"
 
 - name: Ensure Supervisor log dir exists.
   file:

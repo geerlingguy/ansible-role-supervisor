@@ -12,10 +12,9 @@ Python `pip` should be installed. If it is not already installed, you can use th
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    # This variable is not provided by default, to get the latest version.
-    # supervisor_version: '3.3.1'
+    supervisor_version: latest
 
-Install a specific version of Supervisor by setting this variable. See [available Supervisor versions](https://pypi.python.org/pypi/supervisor) on Pypi.
+Install a specific version of Supervisor by setting it here. See [available Supervisor versions](https://pypi.python.org/pypi/supervisor) on Pypi.
 
     supervisor_started: true
     supervisor_enabled: true

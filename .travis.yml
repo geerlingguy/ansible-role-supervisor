@@ -3,6 +3,7 @@ services: docker
 
 env:
   - distro: centos7
+  - distro: centos6
   - distro: fedora24
   - distro: ubuntu1604
   - distro: ubuntu1404
@@ -23,7 +24,6 @@ script:
   # Test whether supervisor is installed correctly.
   - docker exec --tty ${container_id} pip list installed | grep -e '^supervisor.*$'
   - docker exec --tty ${container_id} supervisorctl --help
-  - docker exec --tty ${container_id} ps aux | grep supervisor
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
