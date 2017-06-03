@@ -1,9 +1,16 @@
 ---
-- name: Ensure Supervisor is installed.
+- name: Ensure Supervisor is installed (specific version).
   pip:
     name: supervisor
     state: present
-    version: "{{ supervisor_version | default('latest') }}"
+    version: "{{ supervisor_version }}"
+  when: supervisor_version != 'latest'
+
+- name: Ensure Supervisor is installed (latest version).
+  pip:
+    name: supervisor
+    state: present
+  when: supervisor_version == 'latest'
 
 - name: Ensure Supervisor log dir exists.
   file:

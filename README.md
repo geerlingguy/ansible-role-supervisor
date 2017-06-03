@@ -14,7 +14,7 @@ Available variables are listed below, along with default values (see `defaults/m
 
     supervisor_version: latest
 
-Install a specific version of Supervisor by setting it here. See [available Supervisor versions](https://pypi.python.org/pypi/supervisor) on Pypi.
+Install a specific version of Supervisor by setting it here. See [available Supervisor versions](https://pypi.python.org/pypi/supervisor) on Pypi. `latest` installs the latest stable release.
 
     supervisor_started: true
     supervisor_enabled: true
