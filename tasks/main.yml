@@ -1,0 +1,23 @@
+---
+- name: Ensure Supervisor is installed.
+  pip:
+    name: supervisor
+    state: present
+    version: "{{ supervisor_version | default(omit) }}"
+
+- include: config.yml
+
+- include: init-setup.yml
+  when: supervisor_started or supervisor_enabled
+
+- name: Ensure Supervisor is started (if configured).
+  service:
+    name: supervisord
+    state: started
+  when: supervisor_started
+
+- name: Ensure Supervisor is enabled at boot (if configured).
+  service:
+    name: supervisord
+    enabled: yes
+  when: supervisor_enabled

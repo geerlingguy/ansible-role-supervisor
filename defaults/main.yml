@@ -1,0 +1,28 @@
+---
+# Install a specific version of Supervisor by setting it here.
+supervisor_version: ''
+
+# Choose whether to use an init script or systemd unit configuration to start
+# Supervisor when it's installed and/or after a system boot.
+supervisor_started: true
+supervisor_enabled: true
+
+supervisor_config_path: /etc/supervisor
+
+supervisor_programs:
+  - name: 'true'
+    command: /bin/true
+    state: present
+
+supervisor_nodaemon: false
+
+supervisor_log_dir: /var/log/supervisor
+
+supervisor_user: root
+supervisor_password: 'my_secret_password'
+
+unix_http_server_enable: false
+unix_http_server_socket_path: /var/run/supervisor.sock
+
+inet_http_server_enable: false
+inet_http_server_port: '*:9001'

@@ -1,0 +1,4 @@
+---
+- name: restart supervisor
+  service: name=supervisor state=restarted
+  when: supervisor_started

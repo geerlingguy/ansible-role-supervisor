@@ -1,0 +1,35 @@
+[supervisord]
+nodaemon = {{ supervisor_nodaemon }}
+childlogdir = {{ supervisor_log_dir }}
+user = {{ supervisor_user }}
+
+{% if unix_http_server_enable %}
+[unix_http_server]
+file = {{ unix_http_server_socket_path }}
+chown = {{ supervisor_user }}
+username = {{ supervisor_user }}
+password = {SHA}{{ supervisor_password|hash('sha1') }}
+
+[supervisorctl]
+serverurl = unix://{{ unix_http_server_socket_path }}
+username = {{ supervisor_user }}
+password = {SHA}{{ supervisor_password|hash('sha1') }}
+{% endif %}
+
+{% if inet_http_server_enable %}
+[inet_http_server]
+port = {{ inet_http_server_port }}
+username = {{ supervisor_user }}
+password = {SHA}{{ supervisor_password|hash('sha1') }}
+
+[supervisorctl]
+serverurl = http://localhost:{{ inet_http_server_port }}
+username = {{ supervisor_user }}
+password = {SHA}{{ supervisor_password|hash('sha1') }}
+{% endif %}
+
+[include]
+files = {{ supervisor_config_path }}/conf.d/*.conf
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
