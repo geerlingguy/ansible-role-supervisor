@@ -2,8 +2,8 @@
 - hosts: all
 
   vars:
-    inet_http_server_enable: true
-    inet_http_server_port: '*:9001'
+    supervisor_inet_http_server_enable: true
+    supervisor_inet_http_server_port: '*:9001'
 
   pre_tasks:
     - name: Update apt cache.
