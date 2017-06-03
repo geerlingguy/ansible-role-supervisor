@@ -16,7 +16,6 @@
   file:
     path: "{{ supervisor_log_dir }}"
     state: directory
-    recurse: true
     mode: 0755
 
 - include: config.yml
