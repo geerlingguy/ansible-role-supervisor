@@ -8,7 +8,6 @@ supervisor_started: true
 supervisor_enabled: true
 
 supervisor_config_path: /etc/supervisor
-supervisor_bin_path: /usr/local/bin/supervisord
 
 supervisor_programs:
   - name: 'true'
