@@ -14,6 +14,10 @@ env:
   - distro: ubuntu1604
     playbook: test-inet-http.yml
 
+  # Test unix_http_server.
+  - distro: ubuntu1604
+    playbook: test-unix-http.yml
+
 script:
   # Configure test script so we can run extra tests after playbook is run.
   - export container_id=$(date +%s)
