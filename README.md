@@ -12,9 +12,10 @@ Python `pip` should be installed. If it is not already installed, you can use th
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    supervisor_version: ''
+    # This variable is not provided by default, to get the latest version.
+    # supervisor_version: '3.3.1'
 
-Install a specific version of Supervisor by setting it here. See [available Supervisor versions](https://pypi.python.org/pypi/supervisor) on Pypi.
+Install a specific version of Supervisor by setting this variable. See [available Supervisor versions](https://pypi.python.org/pypi/supervisor) on Pypi.
 
     supervisor_started: true
     supervisor_enabled: true
@@ -24,6 +25,8 @@ Choose whether to use an init script or systemd unit configuration to start Supe
     supervisor_config_path: /etc/supervisor
 
 The path where Supervisor configuration should be stored.
+
+    TODO.
 
 ## Dependencies
 

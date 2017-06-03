@@ -7,4 +7,5 @@
       when: ansible_os_family == 'Debian'
 
   roles:
+    - geerlingguy.pip
     - role_under_test

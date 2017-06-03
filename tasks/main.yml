@@ -5,6 +5,13 @@
     state: present
     version: "{{ supervisor_version | default(omit) }}"
 
+- name: Ensure Supervisor log dir exists.
+  file:
+    path: "{{ supervisor_log_dir }}"
+    state: directory
+    recurse: true
+    mode: 0755
+
 - include: config.yml
 
 - include: init-setup.yml

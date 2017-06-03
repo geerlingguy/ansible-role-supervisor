@@ -1,7 +1,7 @@
 ---
 - name: Ensure Supervisor config paths are present.
   file:
-    path: "{{ supervisor_config_path }}"
+    path: "{{ item }}"
     state: directory
     mode: 0755
     owner: root
