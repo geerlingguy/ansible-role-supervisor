@@ -17,6 +17,7 @@ env:
   # Test unix_http_server.
   - distro: ubuntu1604
     playbook: test-unix-http.yml
+    test_idempotence: false
 
 script:
   # Configure test script so we can run extra tests after playbook is run.
