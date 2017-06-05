@@ -14,9 +14,9 @@ password = {SHA}{{ supervisor_password|hash('sha1') }}
 serverurl = unix://{{ supervisor_unix_http_server_socket_path }}
 username = {{ supervisor_user }}
 password = {SHA}{{ supervisor_password|hash('sha1') }}
-{% endif %}
+{% endif -%}
 
-{% if supervisor_inet_http_server_enable %}
+{%- if supervisor_inet_http_server_enable %}
 [inet_http_server]
 port = {{ supervisor_inet_http_server_port }}
 username = {{ supervisor_user }}

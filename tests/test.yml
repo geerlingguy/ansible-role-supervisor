@@ -1,6 +1,23 @@
 ---
 - hosts: all
 
+  vars:
+    supervisor_programs:
+      - name: 'apache'
+        command: apache2ctl -c "ErrorLog /dev/stdout" -DFOREGROUND
+        state: present
+        configuration: |
+          autostart=true
+          autorestart=true
+          startretries=1
+          startsecs=1
+          redirect_stderr=true
+          stderr_logfile=/var/log/apache-err.log
+          stdout_logfile=/var/log/apache-out.log
+          user=root
+          killasgroup=true
+          stopasgroup=true
+
   pre_tasks:
     - name: Update apt cache.
       apt: update_cache=yes cache_valid_time=600
@@ -10,6 +27,23 @@
       yum: name=initscripts state=present
       when: ansible_os_family == 'RedHat' and ansible_distribution_version.split('.')[0] == '6'
 
+    - block:
+        - package: name=httpd state=present
+        - service: name=httpd state=stopped enabled=no
+      when: ansible_os_family == 'RedHat'
+
+    - block:
+        - package: name=apache2 state=present
+        - service: name=apache2 state=stopped enabled=no
+      when: ansible_os_family == 'Debian'
+
   roles:
     - geerlingguy.pip
     - role_under_test
+
+  tasks:
+    - name: Verify Apache is responding on port 80.
+      uri:
+        url: http://localhost/
+        method: GET
+        status_code: 200

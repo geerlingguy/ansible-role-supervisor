@@ -9,10 +9,22 @@ supervisor_enabled: true
 
 supervisor_config_path: /etc/supervisor
 
-supervisor_programs:
-  - name: 'foo'
-    command: /bin/cat
-    state: present
+# A list of `program`s Supervisor will control. Example commented out below.
+supervisor_programs: []
+  # - name: 'apache'
+  #   command: apache2ctl -c "ErrorLog /dev/stdout" -DFOREGROUND
+  #   state: present
+  #   configuration: |
+  #     autostart=true
+  #     autorestart=true
+  #     startretries=1
+  #     startsecs=1
+  #     redirect_stderr=true
+  #     stderr_logfile=/var/log/apache-err.log
+  #     stdout_logfile=/var/log/apache-out.log
+  #     user=root
+  #     killasgroup=true
+  #     stopasgroup=true
 
 supervisor_nodaemon: false
 

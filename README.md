@@ -29,8 +29,23 @@ The path where Supervisor configuration should be stored.
       - name: 'foo'
         command: /bin/cat
         state: present
+    
+      - name: 'apache'
+        command: apache2ctl -c "ErrorLog /dev/stdout" -DFOREGROUND
+        state: present
+        configuration: |
+          autostart=true
+          autorestart=true
+          startretries=1
+          startsecs=1
+          redirect_stderr=true
+          stderr_logfile=/var/log/apache-err.log
+          stdout_logfile=/var/log/apache-out.log
+          user=root
+          killasgroup=true
+          stopasgroup=true
 
-A list of `program`s to be managed by Supervisor. If you set `state` to `present`, then a configuration file for the program (named `[program-name-here].conf`) will be added to the `conf.d` path included by the global Supervisor configuration.
+`supervisor_programs` is an empty list by default; you can define a list of `program`s to be managed by Supervisor. If you set `state` to `present`, then a configuration file for the program (named `[program-name-here].conf`) will be added to the `conf.d` path included by the global Supervisor configuration. You can also manage program-level configuration on your own, outside this role, if you need more flexibility.
 
     supervisor_nodaemon: false
 
