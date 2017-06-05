@@ -2,9 +2,11 @@
 - hosts: all
 
   vars:
+    supervisor_user: root
+    supervisor_password: fizzbuzz
     supervisor_programs:
       - name: 'apache'
-        command: apache2ctl -c "ErrorLog /dev/stdout" -DFOREGROUND
+        command: apache2ctl -DFOREGROUND
         state: present
         configuration: |
           autostart=true
@@ -27,6 +29,10 @@
       yum: name=initscripts state=present
       when: ansible_os_family == 'RedHat' and ansible_distribution_version.split('.')[0] == '6'
 
+    # Install curl for test purposes.
+    - package: name=curl state=present
+
+    # Install Apache for test purposes.
     - block:
         - package: name=httpd state=present
         - service: name=httpd state=stopped enabled=no
@@ -42,8 +48,24 @@
     - role_under_test
 
   tasks:
+    - name: Trigger handlers so supervisor runs everything it should run.
+      meta: flush_handlers
+
+    - name: Wait for Apache to come up (if it's going to do so...).
+      wait_for:
+        port: 80
+        delay: 2
+
     - name: Verify Apache is responding on port 80.
       uri:
-        url: http://localhost/
+        url: http://127.0.0.1/
         method: GET
         status_code: 200
+
+    - name: Validate supervisorctl works through the default UNIX socket.
+      supervisorctl:
+        name: apache
+        state: restarted
+        username: "{{ supervisor_user }}"
+        password: "{{ supervisor_password }}"
+      changed_when: false

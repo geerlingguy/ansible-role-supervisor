@@ -31,7 +31,7 @@ The path where Supervisor configuration should be stored.
         state: present
     
       - name: 'apache'
-        command: apache2ctl -c "ErrorLog /dev/stdout" -DFOREGROUND
+        command: apache2ctl -DFOREGROUND
         state: present
         configuration: |
           autostart=true
@@ -83,9 +83,9 @@ None.
         - geerlingguy.pip
         - geerlingguy.supervisor
 
-If you need to use `supervisorctl`, you can either use Ansible's built-in module for management, or run it like so (accounting for the variable path to the configuration directory):
+If you need to use `supervisorctl`, you can either use [Ansible's built-in `supervisorctl` module](http://docs.ansible.com/ansible/supervisorctl_module.html) for management, or run it like so (accounting for the variable path to the configuration directory):
 
-    supervisorctl -c /etc/supervisor/supervisord.conf status all
+    supervisorctl -c /etc/supervisor/supervisord.conf -u root -p [password] status all
 
 ## License
 
