@@ -60,10 +60,12 @@ The location where Supervisor logs will be stored.
 
 The user under which `supervisord` will be run, and the password to be used when connecting to Supervisor's HTTP server (either for `supervisorctl` access, or when viewing the administrative UI).
 
-    supervisor_unix_http_server_enable: false
+    supervisor_unix_http_server_enable: true
     supervisor_unix_http_server_socket_path: /var/run/supervisor.sock
 
 Whether to enable the UNIX socket-based HTTP server, and the socket file to use if enabled.
+
+> **Note**: By default, this role enables an HTTP server over a UNIX socket that can be accessed locally using the `_user` and `_password` defined earlier. Make sure you set a secure `supervisor_password` to prevent unauthorized access! (Or, if you don't need to HTTP server nor need to use `supervisorctl`, you should disable the UNIX http server by setting this variable to `false`).
 
     supervisor_inet_http_server_enable: false
     supervisor_inet_http_server_port: '*:9001'
@@ -80,6 +82,10 @@ None.
       roles:
         - geerlingguy.pip
         - geerlingguy.supervisor
+
+If you need to use `supervisorctl`, you can either use Ansible's built-in module for management, or run it like so (accounting for the variable path to the configuration directory):
+
+    supervisorctl -c /etc/supervisor/supervisord.conf status all
 
 ## License
 
