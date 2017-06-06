@@ -4,43 +4,29 @@
   vars:
     supervisor_user: root
     supervisor_password: fizzbuzz
-    supervisor_programs:
-      - name: 'apache'
-        command: apache2ctl -DFOREGROUND
-        state: present
-        configuration: |
-          autostart=true
-          autorestart=true
-          startretries=1
-          startsecs=1
-          redirect_stderr=true
-          stderr_logfile=/var/log/apache-err.log
-          stdout_logfile=/var/log/apache-out.log
-          user=root
-          killasgroup=true
-          stopasgroup=true
 
   pre_tasks:
-    - name: Update apt cache.
+    - name: Update apt cache (Debian).
       apt: update_cache=yes cache_valid_time=600
       when: ansible_os_family == 'Debian'
 
-    - name: Install required dependencies.
-      yum: name=initscripts state=present
-      when: ansible_os_family == 'RedHat' and ansible_distribution_version.split('.')[0] == '6'
-
     # Install curl for test purposes.
-    - package: name=curl state=present
+    - name: Install curl for testing purposes.
+      package: name=curl state=present
 
     # Install Apache for test purposes.
     - block:
-        - package: name=httpd state=present
-        - service: name=httpd state=stopped enabled=no
+        - name: Install Apache (RedHat).
+          package: name=httpd state=present
+        - name: Ensure Apache is not running (RedHat).
+          service: name=httpd state=stopped enabled=no
       when: ansible_os_family == 'RedHat'
 
     - block:
-        - package: name=apache2 state=present
-        - service: name=apache2 state=stopped enabled=no
+        - name: Install Apache (Debian).
+          package: name=apache2 state=present
+        - name: Ensure Apache is not running (Debian).
+          service: name=apache2 state=stopped enabled=no
       when: ansible_os_family == 'Debian'
 
     - name: Create a test HTML file to load.
@@ -53,12 +39,12 @@
         mode: 0644
 
     # Add Apache to supervisor_programs.
-    - name: Set Apache command for Debian.
+    - name: Set Apache start command (Debian).
       set_fact:
         apache_start_command: apache2ctl -DFOREGROUND
       when: ansible_os_family == 'Debian'
 
-    - name: Set Apache command for RedHat.
+    - name: Set Apache start command (RedHat).
       set_fact:
         apache_start_command: httpd -DFOREGROUND
       when: ansible_os_family == 'RedHat'
