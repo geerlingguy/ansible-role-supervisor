@@ -43,6 +43,44 @@
         - service: name=apache2 state=stopped enabled=no
       when: ansible_os_family == 'Debian'
 
+    - name: Create a test HTML file to load.
+      copy:
+        content: "<html><head><title>Test</title></head><body>Test.</body></html>"
+        dest: /var/www/html/index.html
+        force: no
+        group: root
+        owner: root
+        mode: 0644
+
+    # Add Apache to supervisor_programs.
+    - name: Set Apache command for Debian.
+      set_fact:
+        apache_start_command: apache2ctl -DFOREGROUND
+      when: ansible_os_family == 'Debian'
+
+    - name: Set Apache command for RedHat.
+      set_fact:
+        apache_start_command: httpd -DFOREGROUND
+      when: ansible_os_family == 'RedHat'
+
+    - name: Add Apache to supervisor_programs.
+      set_fact:
+        supervisor_programs:
+          - name: 'apache'
+            command: "{{ apache_start_command }}"
+            state: present
+            configuration: |
+              autostart=true
+              autorestart=true
+              startretries=1
+              startsecs=1
+              redirect_stderr=true
+              stderr_logfile=/var/log/apache-err.log
+              stdout_logfile=/var/log/apache-out.log
+              user=root
+              killasgroup=true
+              stopasgroup=true
+
   roles:
     - geerlingguy.pip
     - role_under_test
