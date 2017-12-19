@@ -28,6 +28,10 @@ username = {{ supervisor_user }}
 password = {SHA}{{ supervisor_password|hash('sha1') }}
 {% endif %}
 
+{%- if not supervisor_unix_http_server_enable and not supervisor_inet_http_server_enable %}
+[supervisorctl]
+{% endif %}
+
 [include]
 files = {{ supervisor_config_path }}/conf.d/*.conf
 
