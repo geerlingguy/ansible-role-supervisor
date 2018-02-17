@@ -3,9 +3,9 @@ services: docker
 
 env:
   - distro: centos7
-  - distro: fedora24
+  - distro: fedora27
   - distro: ubuntu1604
-  - distro: debian8
+  - distro: debian9
 
   # Test inet_http_server.
   - distro: ubuntu1604
