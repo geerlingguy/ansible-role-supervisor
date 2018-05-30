@@ -1,4 +1,8 @@
----
-- name: restart supervisor
-  service: name=supervisord state=restarted
-  when: supervisor_started
+- handlers:
+  - name: Reread Supervisor configuration
+    shell: supervisorctl reread
+    become: yes
+
+  - name: restart supervisor
+    service: name=supervisord state=restarted
+    when: supervisor_started
