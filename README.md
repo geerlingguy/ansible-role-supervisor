@@ -60,6 +60,12 @@ The location where Supervisor logs will be stored.
 
 The user under which `supervisord` will be run, and the password to be used when connecting to Supervisor's HTTP server (either for `supervisorctl` access, or when viewing the administrative UI).
 
+    supervisor_supervisorctl_password_protect: true
+    supervisor_unix_http_server_password_protect: true
+    supervisor_inet_http_server_password_protect: true
+
+Password protection can be turned off for Unix HTTP, Inet HTTP and `supervisorctl` command by setting these variables to `false`.
+
     supervisor_unix_http_server_enable: true
     supervisor_unix_http_server_socket_path: /var/run/supervisor.sock
 
