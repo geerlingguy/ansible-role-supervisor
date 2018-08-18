@@ -15,7 +15,7 @@ password = {SHA}{{ supervisor_password|hash('sha1') }}
 
 [supervisorctl]
 serverurl = unix://{{ supervisor_unix_http_server_socket_path }}
-{% if supervisor_supervisorctl_password_protect %}
+{% if supervisor_unix_http_server_password_protect %}
 username = {{ supervisor_user }}
 password = {SHA}{{ supervisor_password|hash('sha1') }}
 {% endif %}
@@ -31,7 +31,7 @@ password = {SHA}{{ supervisor_password|hash('sha1') }}
 
 [supervisorctl]
 serverurl = http://localhost:{{ supervisor_inet_http_server_port }}
-{% if supervisor_supervisorctl_password_protect %}
+{% if supervisor_inet_http_server_password_protect %}
 username = {{ supervisor_user }}
 password = {SHA}{{ supervisor_password|hash('sha1') }}
 {% endif %}
