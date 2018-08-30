@@ -17,7 +17,7 @@ password = {SHA}{{ supervisor_password|hash('sha1') }}
 serverurl = unix://{{ supervisor_unix_http_server_socket_path }}
 {% if supervisor_unix_http_server_password_protect %}
 username = {{ supervisor_user }}
-password = {SHA}{{ supervisor_password|hash('sha1') }}
+password = {{ supervisor_password }}
 {% endif %}
 {% endif -%}
 
