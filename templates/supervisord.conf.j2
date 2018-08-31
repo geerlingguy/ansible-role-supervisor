@@ -8,25 +8,33 @@ pidfile = /var/run/supervisord.pid
 [unix_http_server]
 file = {{ supervisor_unix_http_server_socket_path }}
 chown = {{ supervisor_user }}
+{% if supervisor_unix_http_server_password_protect %}
 username = {{ supervisor_user }}
 password = {SHA}{{ supervisor_password|hash('sha1') }}
+{% endif %}
 
 [supervisorctl]
 serverurl = unix://{{ supervisor_unix_http_server_socket_path }}
+{% if supervisor_unix_http_server_password_protect %}
 username = {{ supervisor_user }}
 password = {{ supervisor_password }}
+{% endif %}
 {% endif -%}
 
 {%- if supervisor_inet_http_server_enable %}
 [inet_http_server]
 port = {{ supervisor_inet_http_server_port }}
+{% if supervisor_inet_http_server_password_protect %}
 username = {{ supervisor_user }}
 password = {SHA}{{ supervisor_password|hash('sha1') }}
+{% endif %}
 
 [supervisorctl]
 serverurl = http://localhost:{{ supervisor_inet_http_server_port }}
+{% if supervisor_inet_http_server_password_protect %}
 username = {{ supervisor_user }}
 password = {SHA}{{ supervisor_password|hash('sha1') }}
+{% endif %}
 {% endif %}
 
 [include]
