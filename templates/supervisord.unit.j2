@@ -6,8 +6,8 @@ Description=Supervisor daemon
 [Service]
 Type=forking
 ExecStart={{ supervisor_bin_path }} -c {{ supervisor_config_path }}/supervisord.conf
-ExecStop=/usr/bin/supervisorctl $OPTIONS shutdown
-ExecReload=/usr/bin/supervisorctl $OPTIONS reload
+ExecStop={{ supervisorctl_bin_path }} $OPTIONS shutdown
+ExecReload={{ supervisorctl_bin_path }} $OPTIONS reload
 KillMode=process
 Restart=on-failure
 RestartSec=42s
