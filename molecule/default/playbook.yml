@@ -1,5 +1,7 @@
 ---
-- hosts: all
+- name: Converge
+  hosts: all
+  become: true
 
   vars:
     supervisor_user: root
@@ -7,7 +9,7 @@
 
   pre_tasks:
     - name: Update apt cache (Debian).
-      apt: update_cache=yes cache_valid_time=600
+      apt: update_cache=true cache_valid_time=600
       when: ansible_os_family == 'Debian'
 
     # Install curl for test purposes.
@@ -33,7 +35,7 @@
       copy:
         content: "<html><head><title>Test</title></head><body>Test.</body></html>"
         dest: /var/www/html/index.html
-        force: no
+        force: false
         group: root
         owner: root
         mode: 0644
@@ -68,13 +70,14 @@
               stopasgroup=true
 
   roles:
-    - geerlingguy.pip
-    - role_under_test
+    - role: geerlingguy.pip
+    - role: geerlingguy.supervisor
 
   tasks:
     - name: Trigger handlers so supervisor runs everything it should run.
       meta: flush_handlers
 
+  post_tasks:
     - name: Wait for Apache to come up (if it's going to do so...).
       wait_for:
         port: 80
@@ -85,6 +88,12 @@
         url: http://127.0.0.1/
         method: GET
         status_code: 200
+
+    - name: Verify supervisorctl is available.
+      command: supervisorctl --help
+      args:
+        warn: false
+      changed_when: false
 
     - name: Validate supervisorctl works through the default UNIX socket.
       supervisorctl:

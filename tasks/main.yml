@@ -35,5 +35,5 @@
 - name: Ensure Supervisor is enabled at boot (if configured).
   service:
     name: supervisord
-    enabled: yes
+    enabled: true
   when: supervisor_enabled

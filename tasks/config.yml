@@ -21,7 +21,7 @@
   template:
     src: program.conf.j2
     dest: "{{ supervisor_config_path }}/conf.d/{{ item.name }}.conf"
-    force: yes
+    force: true
     owner: root
     group: root
     mode: 0644
