@@ -18,3 +18,9 @@
     mode: 0644
   when: "ansible_service_mgr == 'systemd'"
   notify: restart supervisor
+
+- name: Create the group supervisor_chown_group
+  group:
+    name: "{{ supervisor_chown_group }}"
+    system: "{{ supervisor_chown_group_system|default(omit) }}"
+  when: supervisor_chown_group is defined and supervisor_chown_group

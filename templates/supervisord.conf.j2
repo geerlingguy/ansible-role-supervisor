@@ -7,10 +7,14 @@ pidfile = /var/run/supervisord.pid
 {% if supervisor_unix_http_server_enable %}
 [unix_http_server]
 file = {{ supervisor_unix_http_server_socket_path }}
-chown = {{ supervisor_user }}
+chown = {{ supervisor_user }}{% if supervisor_chown_group is defined and supervisor_chown_group %}:{{ supervisor_chown_group }}{% endif %}
+
 {% if supervisor_unix_http_server_password_protect %}
 username = {{ supervisor_user }}
 password = {SHA}{{ supervisor_password|hash('sha1') }}
+{% if supervisor_chmod is defined %}
+chmod = {{ supervisor_chmod }}
+{% endif %}
 {% endif %}
 
 [supervisorctl]
