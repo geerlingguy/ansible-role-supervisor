@@ -77,6 +77,10 @@ Whether to enable the UNIX socket-based HTTP server, and the socket file to use 
 
 Whether to enable the TCP-based HTTP server, and the interface and port on which the server should listen if enabled.
 
+    supervisor_restart_sleep: 0
+    
+On some systems, when ansible runs the restart of the service, it fails because the start happens before the stop has finished running. If this happens to you, changing this value to a larger sleep time (in seconds) will avoid this issue.
+
 ## Dependencies
 
 None.

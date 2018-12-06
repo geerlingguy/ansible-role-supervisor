@@ -40,3 +40,5 @@ supervisor_unix_http_server_password_protect: true
 supervisor_inet_http_server_enable: false
 supervisor_inet_http_server_port: '*:9001'
 supervisor_inet_http_server_password_protect: true
+
+supervisor_restart_sleep: 0
