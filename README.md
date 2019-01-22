@@ -29,7 +29,7 @@ The path where Supervisor configuration should be stored.
       - name: 'foo'
         command: /bin/cat
         state: present
-    
+
       - name: 'apache'
         command: apache2ctl -DFOREGROUND
         state: present
@@ -56,9 +56,14 @@ Set to `true` if you need to run Supervisor in the foreground.
 The location where Supervisor logs will be stored.
 
     supervisor_user: root
-    supervisor_password: 'my_secret_password'
 
-The user under which `supervisord` will be run, and the password to be used when connecting to Supervisor's HTTP server (either for `supervisorctl` access, or when viewing the administrative UI).
+The user under which `supervisord` will be run
+
+    supervisor_socket_user: 'centos'
+    supervisor_socket_chown: 'centos:centos'
+    supervisor_socket_password: 'my_secret_password'
+
+The user owning the socket, and their password to be used when connecting to Supervisor's HTTP server (either for `supervisorctl` access, or when viewing the administrative UI).
 
     supervisor_unix_http_server_password_protect: true
     supervisor_inet_http_server_password_protect: true
