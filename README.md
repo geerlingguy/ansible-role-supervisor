@@ -61,7 +61,7 @@ The user under which `supervisord` will be run
 
     supervisor_socket_user: 'centos'
     supervisor_socket_chown: 'centos:centos'
-    supervisor_socket_password: 'my_secret_password'
+    supervisor_password: 'my_secret_password'
 
 The user owning the socket, and their password to be used when connecting to Supervisor's HTTP server (either for `supervisorctl` access, or when viewing the administrative UI).
 
