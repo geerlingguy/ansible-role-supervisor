@@ -77,6 +77,11 @@ Whether to enable the UNIX socket-based HTTP server, and the socket file to use 
 
 Whether to enable the TCP-based HTTP server, and the interface and port on which the server should listen if enabled.
 
+
+    supervisor_pip_executable: '/usr/bin/pip'
+    
+Specific pip executable to run. Helps to succeed in the situation when the host is managed by Ansible using Python 3, but requested Supervisor version requires only Python 2.4 or later.
+
 ## Dependencies
 
 None.
