@@ -40,3 +40,8 @@ supervisor_unix_http_server_password_protect: true
 supervisor_inet_http_server_enable: false
 supervisor_inet_http_server_port: '*:9001'
 supervisor_inet_http_server_password_protect: true
+
+# Specific pip executable to run.
+# Helps to succeed in the situation when the host is managed by Ansible using Python 3,
+# but requested Supervisor version requires only Python 2.4 or later.
+supervisor_pip_executable: '/usr/bin/pip'
