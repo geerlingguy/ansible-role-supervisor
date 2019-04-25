@@ -77,6 +77,14 @@ Whether to enable the UNIX socket-based HTTP server, and the socket file to use 
 
 Whether to enable the TCP-based HTTP server, and the interface and port on which the server should listen if enabled.
 
+
+    supervisor_systemd_unit_template: supervisord.unit.j2
+
+If the default systemd unit template does not suit your needs, you can replace it with your own.  What you need to do:
+* create a `templates` directory at the same level as your playbook
+* create a `templates/mysupervisord.unit.j2` file (make sure sure it's name is different from the default template)
+* set the variable `supervisor_systemd_unit_template: mysupervisord.unit.j2`
+
 ## Dependencies
 
 None.

@@ -11,7 +11,7 @@
 
 - name: Copy Supervisor unit file into place (for systemd systems).
   template:
-    src: supervisord.unit.j2
+    src: "{{ supervisor_systemd_unit_template }}"
     dest: /etc/systemd/system/supervisord.service
     owner: root
     group: root
