@@ -7,12 +7,14 @@
     name: supervisor
     state: present
     version: "{{ supervisor_version }}"
+    extra_args: --trusted-host=pypi.python.org --trusted-host=pypi.org --trusted-host=files.pythonhosted.org
   when: supervisor_version != 'latest'
 
 - name: Ensure Supervisor is installed (latest version).
   pip:
     name: supervisor
     state: present
+    extra_args: --trusted-host=pypi.python.org --trusted-host=pypi.org --trusted-host=files.pythonhosted.org
   when: supervisor_version == 'latest'
 
 - name: Ensure Supervisor log dir exists.
