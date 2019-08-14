@@ -29,6 +29,9 @@ supervisor_programs: []
 supervisor_nodaemon: false
 
 supervisor_log_dir: /var/log/supervisor
+supervisor_logfile: /var/log/supervisor/supervisor.log
+supervisor_logfile_maxbytes: 50MB
+supervisor_logfile_backups: 10
 
 supervisor_user: root
 supervisor_password: 'my_secret_password'

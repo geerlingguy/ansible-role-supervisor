@@ -1,6 +1,9 @@
 [supervisord]
 nodaemon = {{ supervisor_nodaemon }}
 childlogdir = {{ supervisor_log_dir }}
+logfile = {{ supervisor_logfile }}
+logfile_maxbytes = {{ supervisor_logfile_maxbytes }}
+logfile_backups = {{ supervisor_logfile_backups }}
 user = {{ supervisor_user }}
 pidfile = /var/run/supervisord.pid
 
