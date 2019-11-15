@@ -30,7 +30,9 @@ supervisor_nodaemon: false
 
 supervisor_log_dir: /var/log/supervisor
 
+supervisor_user_enable: true
 supervisor_user: root
+supervisor_chmod: '0700'
 supervisor_password: 'my_secret_password'
 
 supervisor_unix_http_server_enable: true
