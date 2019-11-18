@@ -1,3 +1,8 @@
+UseGalaxy.eu no longer uses this repository. We have migrated to [SystemD](https://github.com/usegalaxy-eu/ansible-galaxy-systemd) as we find it fits better with our workflow
+
+----
+
+
 # Ansible Role: Supervisor
 
 [![Build Status](https://travis-ci.org/geerlingguy/ansible-role-supervisor.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-supervisor)
