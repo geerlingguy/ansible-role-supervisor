@@ -20,7 +20,7 @@
 - name: Ensure Supervisor program configs are present.
   template:
     src: program.conf.j2
-    dest: "{{ supervisor_config_path }}/conf.d/{{ item.name }}.conf"
+    dest: "{{ supervisor_config_path }}/conf.d/galaxy.conf"
     force: true
     owner: root
     group: root

@@ -1,5 +1,10 @@
+{% for item in supervisor_programs %}
 [program:{{ item.name }}]
 command={{ item.command }}
 {% if item.configuration is defined %}
 {{ item.configuration }}
 {% endif %}
+{% endfor %}
+
+[group:galaxy]
+programs: {% for item in supervisor_programs %}{% if loop.last %}{{ item.name }}{% else %}{{ item.name }}, {% endif %}{% endfor %}
