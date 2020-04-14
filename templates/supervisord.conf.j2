@@ -1,44 +1,73 @@
-[supervisord]
-nodaemon = {{ supervisor_nodaemon }}
-childlogdir = {{ supervisor_log_dir }}
-user = {{ supervisor_user }}
-pidfile = /var/run/supervisord.pid
+; This file is managed remotely via Ansible, all changes will be lost
+
+; See the documentation for help in configuring this file.
+; [docs] http://supervisord.org/configuration.html
+
+[supervisord] ;----------------------------------------------------------------
+
+; Daemon
+; ------
+
+nodaemon    = {{ supervisor_nodaemon }}
+identifier  = supervisor
+pidfile     = /var/run/supervisord.pid
+user        = root
+umask       = 022
+
+; Tuning parameters
+; -----------------
+
+; The minimum number of file descriptors that must be available
+minfds = 1024
+; The minimum number of process descriptors that must be available
+minprocs = 200
+; Prevent supervisord from clearing any existing AUTO chlild log files at
+; startup time. Useful for debugging.
+nocleanup = false
+
+; Logging
+; -------
+
+logfile          = /var/log/supervisor/supervisord.log
+loglevel         = info
+logfile_maxbytes = 5MB
+logfile_backups  = 5
+childlogdir      = {{ supervisor_log_dir }}
+strip_ansi       = false
 
 {% if supervisor_unix_http_server_enable %}
-[unix_http_server]
-file = {{ supervisor_unix_http_server_socket_path }}
-chown = {{ supervisor_user }}
+[unix_http_server] ;----------------------------------------------------------------
+
+file    = {{ supervisor_unix_http_server_socket_path }}
+chmod   = 0700
+chown   = {{supervisor_user}}:{{supervisor_user}}
 {% if supervisor_unix_http_server_password_protect %}
-username = {{ supervisor_user }}
-password = {SHA}{{ supervisor_password|hash('sha1') }}
 {% endif %}
 
-[supervisorctl]
-serverurl = unix://{{ supervisor_unix_http_server_socket_path }}
-{% if supervisor_unix_http_server_password_protect %}
+[inet_http_server] ;----------------------------------------------------------------
+
+port = *:{{ supervisor_inet_http_server_port }}
+{% if supervisor_inet_http_server_password_protect %}
 username = {{ supervisor_user }}
 password = {{ supervisor_password }}
 {% endif %}
-{% endif -%}
 
-{%- if supervisor_inet_http_server_enable %}
-[inet_http_server]
-port = {{ supervisor_inet_http_server_port }}
+[supervisorctl] ;----------------------------------------------------------------
+
+serverurl = http://127.0.0.1:{{ supervisor_inet_http_server_port }}
 {% if supervisor_inet_http_server_password_protect %}
 username = {{ supervisor_user }}
-password = {SHA}{{ supervisor_password|hash('sha1') }}
-{% endif %}
-
-[supervisorctl]
-serverurl = http://localhost:{{ supervisor_inet_http_server_port }}
-{% if supervisor_inet_http_server_password_protect %}
-username = {{ supervisor_user }}
-password = {SHA}{{ supervisor_password|hash('sha1') }}
+password = {{ supervisor_password }}
 {% endif %}
 {% endif %}
 
-[include]
+[include] ;----------------------------------------------------------------
+
 files = {{ supervisor_config_path }}/conf.d/*.conf
 
 [rpcinterface:supervisor]
+
+; This section must remain in the config file for RPC (supervisorctl/
+; web interface) to work, additional interfaces may be added by defining
+; them in separate `rpcinterface: sections`.
 supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
