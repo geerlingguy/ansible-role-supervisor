@@ -12,7 +12,7 @@
 - name: Ensure Supervisor is installed (latest version).
   pip:
     name: supervisor
-    state: present
+    state: latest
   when: supervisor_version == 'latest'
 
 - name: Ensure Supervisor log dir exists.
