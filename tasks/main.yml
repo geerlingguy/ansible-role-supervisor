@@ -2,18 +2,11 @@
 - name: Include OS-specific variables.
   include_vars: "{{ ansible_os_family }}.yml"
 
-- name: Ensure Supervisor is installed (specific version).
+- name: Ensure Supervisor is installed.
   pip:
     name: supervisor
     state: present
-    version: "{{ supervisor_version }}"
-  when: supervisor_version != 'latest'
-
-- name: Ensure Supervisor is installed (latest version).
-  pip:
-    name: supervisor
-    state: present
-  when: supervisor_version == 'latest'
+    version: "{{ supervisor_version | default(omit) }}"
 
 - name: Ensure Supervisor log dir exists.
   file:

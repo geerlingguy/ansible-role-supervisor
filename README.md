@@ -12,9 +12,9 @@ Python `pip` should be installed. If it is not already installed, you can use th
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    supervisor_version: latest
+    supervisor_version: ''
 
-Install a specific version of Supervisor by setting it here. See [available Supervisor versions](https://pypi.python.org/pypi/supervisor) on Pypi. `latest` installs the latest stable release.
+Install a specific version of Supervisor by setting it here. See [available Supervisor versions](https://pypi.python.org/pypi/supervisor) on Pypi. If no version is set, it will install the latest stable version of Supervisor when the role is run.
 
     supervisor_started: true
     supervisor_enabled: true
