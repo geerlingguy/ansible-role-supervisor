@@ -3,6 +3,9 @@
   hosts: all
   become: true
 
+  environment:
+    PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
+
   vars:
     supervisor_user: root
     supervisor_password: fizzbuzz
