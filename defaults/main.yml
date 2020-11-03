@@ -26,6 +26,21 @@ supervisor_programs: []
 #     killasgroup=true
 #     stopasgroup=true
 
+# A list of `fcgi-program`s Supervisor will control. Example commented out below.
+supervisor_fcgi_programs: []
+# - name: 'asgi'
+#   command: daphne --fd 0 --access-log - --proxy-headers mysite.asgi:application
+#   state: present
+#   configuration: |
+#     socket=tcp://localhost:8001
+#     directory=/my/app/path
+#     numprocs=4
+#     process_name=asgi%(process_num)d
+#     autostart=true
+#     autorestart=true
+#     stdout_logfile=/your/log/asgi.log
+#     redirect_stderr=true
+
 supervisor_nodaemon: false
 
 supervisor_log_dir: /var/log/supervisor
