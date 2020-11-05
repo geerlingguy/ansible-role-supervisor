@@ -1,6 +1,6 @@
 # Ansible Role: Supervisor
 
-[![Build Status](https://travis-ci.com/geerlingguy/ansible-role-supervisor.svg?branch=master)](https://travis-ci.com/geerlingguy/ansible-role-supervisor)
+[![CI](https://github.com/geerlingguy/ansible-role-supervisor/workflows/CI/badge.svg?event=push)](https://github.com/geerlingguy/ansible-role-supervisor/actions?query=workflow%3ACI)
 
 An Ansible Role that installs [Supervisor](http://supervisord.org/) on Linux.
 
