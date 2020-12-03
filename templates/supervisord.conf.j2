@@ -30,10 +30,10 @@ password = {SHA}{{ supervisor_password|hash('sha1') }}
 {% endif %}
 
 [supervisorctl]
-serverurl = http://localhost:{{ supervisor_inet_http_server_port }}
+serverurl = http://{{ 'localhost' if supervisor_inet_http_server_port.split(':')[0] == '*' or supervisor_inet_http_server_port.split(':')[0] == '' else supervisor_inet_http_server_port.split(':')[0] }}:{{ supervisor_inet_http_server_port.split(':')[1] }}
 {% if supervisor_inet_http_server_password_protect %}
 username = {{ supervisor_user }}
-password = {SHA}{{ supervisor_password|hash('sha1') }}
+password = {{ supervisor_password }}
 {% endif %}
 {% endif %}
 
