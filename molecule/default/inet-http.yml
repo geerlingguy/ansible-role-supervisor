@@ -39,3 +39,9 @@
         user: "{{ supervisor_user }}"
         password: "fizzbuzz"
         status_code: 401
+
+    - name: Validate supervisorctl works with inet
+      command: supervisorctl status
+      args:
+        warn: false
+      changed_when: false
