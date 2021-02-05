@@ -35,6 +35,8 @@ supervisor_password: 'my_secret_password'
 
 supervisor_unix_http_server_enable: true
 supervisor_unix_http_server_socket_path: /var/run/supervisor.sock
+supervisor_unix_http_server_socket_owner: root
+supervisor_unix_http_server_socket_mod: 700
 supervisor_unix_http_server_password_protect: true
 
 supervisor_inet_http_server_enable: false
