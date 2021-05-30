@@ -88,7 +88,7 @@ None.
         - geerlingguy.pip
         - geerlingguy.supervisor
 
-If you need to use `supervisorctl`, you can either use [Ansible's built-in `supervisorctl` module](http://docs.ansible.com/ansible/supervisorctl_module.html) for management, or run it like so (accounting for the variable path to the configuration directory):
+If you need to use `supervisorctl`, you can either use [Ansible's built-in `supervisorctl` module](https://docs.ansible.com/ansible/latest/collections/community/general/supervisorctl_module.html) for management, or run it like so (accounting for the variable path to the configuration directory):
 
     supervisorctl -c /etc/supervisor/supervisord.conf -u root -p [password] status all
 
