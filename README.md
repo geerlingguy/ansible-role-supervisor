@@ -29,7 +29,7 @@ The path where Supervisor configuration should be stored.
       - name: 'foo'
         command: /bin/cat
         state: present
-    
+
       - name: 'apache'
         command: apache2ctl -DFOREGROUND
         state: present
@@ -67,8 +67,10 @@ Password protection can be turned off for Unix HTTP and Inet HTTP by setting the
 
     supervisor_unix_http_server_enable: true
     supervisor_unix_http_server_socket_path: /var/run/supervisor.sock
+    supervisor_unix_http_server_socket_owner: root
+    supervisor_unix_http_server_socket_mod: 700
 
-Whether to enable the UNIX socket-based HTTP server, and the socket file to use if enabled.
+Whether to enable the UNIX socket-based HTTP server, and the socket file with permissions to use if enabled.
 
 > **Note**: By default, this role enables an HTTP server over a UNIX socket that can be accessed locally using the `_user` and `_password` defined earlier. Make sure you set a secure `supervisor_password` to prevent unauthorized access! (Or, if you don't need to HTTP server nor need to use `supervisorctl`, you should disable the UNIX http server by setting this variable to `false`).
 
