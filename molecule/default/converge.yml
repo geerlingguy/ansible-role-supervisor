@@ -105,3 +105,9 @@
         username: "{{ supervisor_user }}"
         password: "{{ supervisor_password }}"
       changed_when: false
+
+    - name: Validate supervisorctl works with unix socket
+      command: supervisorctl status
+      args:
+        warn: false
+      changed_when: false
