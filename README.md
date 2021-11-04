@@ -1,6 +1,6 @@
 # Ansible Role: Supervisor
 
-[![Build Status](https://travis-ci.com/geerlingguy/ansible-role-supervisor.svg?branch=master)](https://travis-ci.com/geerlingguy/ansible-role-supervisor)
+[![CI](https://github.com/geerlingguy/ansible-role-supervisor/workflows/CI/badge.svg?event=push)](https://github.com/geerlingguy/ansible-role-supervisor/actions?query=workflow%3ACI)
 
 An Ansible Role that installs [Supervisor](http://supervisord.org/) on Linux.
 
@@ -88,7 +88,7 @@ None.
         - geerlingguy.pip
         - geerlingguy.supervisor
 
-If you need to use `supervisorctl`, you can either use [Ansible's built-in `supervisorctl` module](http://docs.ansible.com/ansible/supervisorctl_module.html) for management, or run it like so (accounting for the variable path to the configuration directory):
+If you need to use `supervisorctl`, you can either use [Ansible's built-in `supervisorctl` module](https://docs.ansible.com/ansible/latest/collections/community/general/supervisorctl_module.html) for management, or run it like so (accounting for the variable path to the configuration directory):
 
     supervisorctl -c /etc/supervisor/supervisord.conf -u root -p [password] status all
 

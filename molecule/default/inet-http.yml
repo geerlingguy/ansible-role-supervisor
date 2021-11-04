@@ -13,12 +13,6 @@
       apt: update_cache=true cache_valid_time=600
       when: ansible_os_family == 'Debian'
 
-    - name: Install required dependencies.
-      yum: name=initscripts state=present
-      when:
-        - ansible_os_family == 'RedHat'
-        - ansible_distribution_version.split('.')[0] == '6'
-
   roles:
     - role: geerlingguy.pip
     - role: geerlingguy.supervisor
@@ -39,3 +33,9 @@
         user: "{{ supervisor_user }}"
         password: "fizzbuzz"
         status_code: 401
+
+    - name: Validate supervisorctl works with inet
+      command: supervisorctl status
+      args:
+        warn: false
+      changed_when: false

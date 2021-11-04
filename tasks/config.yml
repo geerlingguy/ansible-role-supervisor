@@ -39,4 +39,11 @@
     mode: 0644
   when: item.state|default('present') != 'absent'
   loop: "{{ supervisor_fcgi_programs }}"
+
+- name: Ensure unwanted Supervisor program configs are absent
+  file:
+    path: "{{ supervisor_config_path }}/conf.d/{{ item.name }}.conf"
+    state: absent
+  when: item.state|default('present') == 'absent'
+  with_items: "{{ supervisor_programs }}"
   notify: restart supervisor
