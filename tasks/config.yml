@@ -28,7 +28,7 @@
   when: item.state|default('present') != 'absent'
   loop: "{{ supervisor_programs }}"
   notify: restart supervisor
-  
+
 - name: Ensure Supervisor fcgi program configs are present.
   template:
     src: fcgi-program.conf.j2
