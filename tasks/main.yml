@@ -17,9 +17,9 @@
     state: directory
     mode: 0755
 
-- include: config.yml
+- include_tasks: config.yml
 
-- include: init-setup.yml
+- include_tasks: init-setup.yml
   when: supervisor_started or supervisor_enabled
 
 - name: Ensure Supervisor is started (if configured).
