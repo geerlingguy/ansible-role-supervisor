@@ -12,7 +12,7 @@
 
 - name: Ensure Supervisor configuration is present.
   template:
-    src: supervisord.conf.j2
+    src: "{{ supervisor_conf_template }}"
     dest: "{{ supervisor_config_path }}/supervisord.conf"
     mode: 0644
   notify: restart supervisor
