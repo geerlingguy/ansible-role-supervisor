@@ -9,7 +9,7 @@ supervisor_enabled: true
 
 supervisor_config_path: /etc/supervisor
 
-supervisor_conf_tempate: 'supervisord.conf.j2'
+supervisor_conf_tempate: "supervisord.conf.j2"
 
 # A list of `program`s Supervisor will control. Example commented out below.
 supervisor_programs: []
