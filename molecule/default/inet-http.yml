@@ -36,6 +36,4 @@
 
     - name: Validate supervisorctl works with inet
       command: supervisorctl status
-      args:
-        warn: false
       changed_when: false
