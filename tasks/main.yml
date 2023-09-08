@@ -5,11 +5,18 @@
     - "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
     - "{{ ansible_os_family }}.yml"
 
-- name: Ensure Supervisor is installed.
+- name: Ensure Supervisor is installed using pip.
   pip:
     name: supervisor
     state: present
     version: "{{ supervisor_version | default(omit) }}"
+  when: not supervisor_apt_install
+
+- name: Ensure Supervisor is installed using apt.
+  pip:
+    name: "supervisor={{ supervisor_version | default('*') }}"
+    state: present
+  when: supervisor_apt_install
 
 - name: Ensure Supervisor log dir exists.
   file:
