@@ -7,6 +7,8 @@ supervisor_version: ''
 supervisor_started: true
 supervisor_enabled: true
 
+supervisor_apt_install: false
+
 supervisor_config_path: /etc/supervisor
 
 # A list of `program`s Supervisor will control. Example commented out below.

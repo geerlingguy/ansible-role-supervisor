@@ -94,8 +94,6 @@
 
     - name: Verify supervisorctl is available.
       command: supervisorctl --help
-      args:
-        warn: false
       changed_when: false
 
     - name: Validate supervisorctl works through the default UNIX socket.
@@ -104,4 +102,8 @@
         state: restarted
         username: "{{ supervisor_user }}"
         password: "{{ supervisor_password }}"
+      changed_when: false
+
+    - name: Validate supervisorctl works with unix socket
+      command: supervisorctl status
       changed_when: false

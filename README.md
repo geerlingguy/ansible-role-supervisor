@@ -6,7 +6,20 @@ An Ansible Role that installs [Supervisor](http://supervisord.org/) on Linux.
 
 ## Requirements
 
-Python `pip` should be installed. If it is not already installed, you can use the `geerlingguy.pip` Ansible role to install Pip prior to running this role.
+### Using `pip`
+
+By default, Python `pip` is used to install Supervisor, it hence should be installed. If it is not already installed, you can use the `geerlingguy.pip` Ansible role to install Pip prior to running this role.
+
+### Using `apt`
+
+On distributions that support it and if Supervisor is packaged, you can use `apt` to install Supervisor by specifying, as a variable:
+
+    supervisor_apt_install: true
+
+Depending on your distribution, the binary paths (default: `/usr/bin/local/supervisor` and `/usr/bin/local/supervisorctl`) can be overwritten:
+
+    supervisor_bin_path: /usr/bin/supervisor
+    supervisorctl_bin_path: /usr/bin/supervisorctl
 
 ## Role Variables
 
@@ -90,7 +103,7 @@ None.
         - geerlingguy.pip
         - geerlingguy.supervisor
 
-If you need to use `supervisorctl`, you can either use [Ansible's built-in `supervisorctl` module](http://docs.ansible.com/ansible/supervisorctl_module.html) for management, or run it like so (accounting for the variable path to the configuration directory):
+If you need to use `supervisorctl`, you can either use [Ansible's built-in `supervisorctl` module](https://docs.ansible.com/ansible/latest/collections/community/general/supervisorctl_module.html) for management, or run it like so (accounting for the variable path to the configuration directory):
 
     supervisorctl -c /etc/supervisor/supervisord.conf -u root -p [password] status all
 
