@@ -13,7 +13,7 @@
   when: not supervisor_apt_install
 
 - name: Ensure Supervisor is installed using apt.
-  pip:
+  apt:
     name: "supervisor={{ supervisor_version | default('*') }}"
     state: present
   when: supervisor_apt_install
