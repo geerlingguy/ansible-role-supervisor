@@ -1,4 +1,6 @@
 ---
 - name: restart supervisor
-  service: name=supervisord state=restarted
+  service:
+    name: "{{ supervisor_service_name }}"
+    state: restarted
   when: supervisor_started

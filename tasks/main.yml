@@ -31,12 +31,12 @@
 
 - name: Ensure Supervisor is started (if configured).
   service:
-    name: supervisord
+    name: "{{ supervisor_service_name }}"
     state: started
   when: supervisor_started
 
 - name: Ensure Supervisor is enabled at boot (if configured).
   service:
-    name: supervisord
+    name: "{{ supervisor_service_name }}"
     enabled: true
   when: supervisor_enabled
