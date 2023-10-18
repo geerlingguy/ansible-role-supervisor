@@ -24,6 +24,11 @@
     state: directory
     mode: 0755
 
+- name: Set supervisor service name for APT
+  set_fact:
+    supervisor_service_name: supervisor
+  when: supervisor_apt_install
+
 - include_tasks: config.yml
 
 - include_tasks: init-setup.yml
