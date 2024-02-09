@@ -18,3 +18,10 @@
     mode: 0644
   when: "ansible_service_mgr == 'systemd'"
   notify: restart supervisor
+
+- name: Disable default supervisor systemd service when installing with APT.
+  systemd:
+    name: supervisor
+    state: stopped
+    enabled: false
+  when: supervisor_apt_install
