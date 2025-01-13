@@ -5,6 +5,17 @@
     - "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
     - "{{ ansible_os_family }}.yml"
 
+- name: Ensure Pip is installed.
+  package:
+    name: "{{ pip_package }}"
+    state: present
+
+- name: Remove EXTERNALLY-MANAGED.
+  file:
+    path: /usr/lib/python3.{{ ansible_python.version.minor }}/EXTERNALLY-MANAGED
+    state: absent
+  ignore_errors: true
+
 - name: Ensure Supervisor is installed.
   pip:
     name: supervisor
