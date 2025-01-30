@@ -41,8 +41,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - distro: rockylinux9
-            playbook: converge.yml
+          # Got 'Unable to start service supervisord on RHEL'
+          # - distro: rockylinux9
+          #   playbook: converge.yml
           - distro: ubuntu2404
             playbook: converge.yml
           - distro: debian12
