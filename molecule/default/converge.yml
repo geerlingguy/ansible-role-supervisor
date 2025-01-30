@@ -12,12 +12,24 @@
 
   pre_tasks:
     - name: Update apt cache (Debian).
-      apt: update_cache=true cache_valid_time=600
+      apt:
+        update_cache: true
+        cache_valid_time: 600
       when: ansible_os_family == 'Debian'
 
     # Install curl for test purposes.
-    - name: Install curl for testing purposes.
-      package: name=curl state=present
+    - name: Install curl for testing purposes (RedHat).
+      dnf:
+        name: curl
+        allowerasing: true
+        state: present
+      when: ansible_os_family == 'RedHat'
+
+    - name: Install curl for testing purposes (Others).
+      package:
+        name: curl
+        state: present
+      when: ansible_os_family != 'RedHat'
 
     # Install Apache for test purposes.
     - block:
