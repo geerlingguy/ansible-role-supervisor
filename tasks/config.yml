@@ -36,3 +36,12 @@
   when: item.state|default('present') == 'absent'
   with_items: "{{ supervisor_programs }}"
   notify: restart supervisor
+
+- name: Include static config files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+  with_items: "{{ supervisor_config_files }}"
+  notify: restart supervisor
