@@ -26,6 +26,11 @@ supervisor_programs: []
 #     killasgroup=true
 #     stopasgroup=true
 
+# A list of local files to copy. Example commented out below.
+supervisor_config_files: []
+# - src: files/supervisor/fcgi.conf
+#   dest: "{{ supervisor_config_path }}/conf.d/fcgi.conf"
+
 supervisor_nodaemon: false
 
 supervisor_log_dir: /var/log/supervisor

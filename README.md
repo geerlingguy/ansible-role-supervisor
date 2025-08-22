@@ -47,6 +47,8 @@ The path where Supervisor configuration should be stored.
 
 `supervisor_programs` is an empty list by default; you can define a list of `program`s to be managed by Supervisor. If you set `state` to `present`, then a configuration file for the program (named `[program-name-here].conf`) will be added to the `conf.d` path included by the global Supervisor configuration. You can also manage program-level configuration on your own, outside this role, if you need more flexibility.
 
+`supervisor_config_files` is a list of hashes (with `src` and `dest` keys) conf files to copy from the control machine. For example, to copy manually created conf files to the `conf.d` path, for example `dest: "{{ supervisor_config_path }}/conf.d/fcgi.conf"`.
+
     supervisor_nodaemon: false
 
 Set to `true` if you need to run Supervisor in the foreground.
