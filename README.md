@@ -25,6 +25,10 @@ Choose whether to use an init script or systemd unit configuration to start Supe
 
 The path where Supervisor configuration should be stored.
 
+    supervisor_include_files: '{{ supervisor_config_path }}/conf.d/*.conf'
+
+The `files` supervisor will include from the main supervisor configuration.
+
     supervisor_programs:
       - name: 'foo'
         command: /bin/cat

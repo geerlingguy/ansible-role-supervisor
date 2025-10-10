@@ -8,6 +8,7 @@ supervisor_started: true
 supervisor_enabled: true
 
 supervisor_config_path: /etc/supervisor
+supervisor_include_files: '{{ supervisor_config_path }}/conf.d/*.conf'
 
 # A list of `program`s Supervisor will control. Example commented out below.
 supervisor_programs: []
@@ -40,5 +41,3 @@ supervisor_unix_http_server_password_protect: true
 supervisor_inet_http_server_enable: false
 supervisor_inet_http_server_port: '*:9001'
 supervisor_inet_http_server_password_protect: true
-
-supervisor_include: '{{ supervisor_config_path }}/conf.d/*.conf'

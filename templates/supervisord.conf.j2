@@ -38,7 +38,7 @@ password = {{ supervisor_password }}
 {% endif %}
 
 [include]
-files = {{ supervisor_include }}
+files = {{ supervisor_include_files }}
 
 [rpcinterface:supervisor]
 supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
