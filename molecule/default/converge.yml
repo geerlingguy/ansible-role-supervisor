@@ -15,7 +15,7 @@
       apt:
         update_cache: true
         cache_valid_time: 600
-      when: ansible_os_family == 'Debian'
+      when: ansible_facts.os_family == 'Debian'
 
     # Install curl for test purposes.
     - name: Install curl for testing purposes (RedHat).
@@ -23,13 +23,13 @@
         name: curl
         allowerasing: true
         state: present
-      when: ansible_os_family == 'RedHat'
+      when: ansible_facts.os_family == 'RedHat'
 
     - name: Install curl for testing purposes (Others).
       package:
         name: curl
         state: present
-      when: ansible_os_family != 'RedHat'
+      when: ansible_facts.os_family != 'RedHat'
 
     # Install Apache for test purposes.
     - block:
@@ -37,14 +37,14 @@
           package: name=httpd state=present
         - name: Ensure Apache is not running (RedHat).
           service: name=httpd state=stopped enabled=no
-      when: ansible_os_family == 'RedHat'
+      when: ansible_facts.os_family == 'RedHat'
 
     - block:
         - name: Install Apache (Debian).
           package: name=apache2 state=present
         - name: Ensure Apache is not running (Debian).
           service: name=apache2 state=stopped enabled=no
-      when: ansible_os_family == 'Debian'
+      when: ansible_facts.os_family == 'Debian'
 
     - name: Create a test HTML file to load.
       copy:
@@ -59,12 +59,12 @@
     - name: Set Apache start command (Debian).
       set_fact:
         apache_start_command: apache2ctl -DFOREGROUND
-      when: ansible_os_family == 'Debian'
+      when: ansible_facts.os_family == 'Debian'
 
     - name: Set Apache start command (RedHat).
       set_fact:
         apache_start_command: httpd -DFOREGROUND
-      when: ansible_os_family == 'RedHat'
+      when: ansible_facts.os_family == 'RedHat'
 
     - name: Add Apache to supervisor_programs.
       set_fact:
